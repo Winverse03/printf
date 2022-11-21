@@ -2,42 +2,50 @@
 #include <stdarg.h>
 #include <stddef.h>
 
-int _printf(const char *, const format, ...)
+/**
+ * _printf - prints format of parameters
+ * @format: string that contains the format to print
+ * Return: number of characters given
+ */
+
+int _printf(const char *format, ...)
 {
+	va_list nc_print;
+	int i = 0;
+	int j = 0;
+	char *str = NULL;
 
-    va_list nach_print;
-    int i = 0;
-    int j = 0;
-    int *str = NULL;
-
-    va_start(nc_print, format);
-
-    while(format [i] != '\0')
-    {
-        if(format [i] != '%')
-        _putchar(format[i]);
-        else
-        {
-            if(format [i+1] == 'c')
-            _putchar(va_arg(nc_print, int));
-            i++;
-        }
-        else if(format [i+1]) == 's')
-        {
-            i++;
-            str = va_arg(nc_print, char *);
-            while(str[j] != '\0')
-            {
-                _putchar(str[j]);
-                j++;
-            }
-            else if(format [i+1] == '%')
-            {
-                i++;
-                _putchar('%')
-            }
-        }
-    }
-    va_end(nc_print);
-    return (0);
+	va_start(nc_print, format);
+	while (format[i] != '\0')
+	{
+		if (format[i] != '%')
+			_putchar(format[i]);
+		else
+		{
+			if (format[i + 1] == 'c')
+			{
+				_putchar(va_arg(nc_print, int));
+				i++;
+			}
+			else if (format[i + 1] == 's')
+			{
+				i++;
+				str = va_arg(nc_print, char *);
+				while (str[j] != '\0')
+				{
+					_putchar(str[j]);
+				j++;
+				}
+			}
+			else if (format[i + 1] == '%')
+			{
+				i++;
+				_putchar('%');
+			}
+			i++;
+		}
+			
+	}
+	va_end(nc_print);
+	return (0);
 }
