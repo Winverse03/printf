@@ -1,50 +1,54 @@
 #include "main.h"
+#include <stdarg.h>
+#include <stddef.h>
 
 /**
- * _printf - prints formatted data to stdout
+ * _printf - prints format of parameters
  * @format: string that contains the format to print
- * Return: number of characters written
+ * Return: number of characters given
  */
-int _printf(char *format, ...)
-{
-	int written = 0, (*structype)(char *, va_list);
-	char q[3];
-	va_list pa;
 
-	if (format == NULL)
-		return (-1);
-	q[2] = '\0';
-	va_start(pa, format);
-	_putchar(-1);
-	while (format[0])
+int _printf(const char *format, ...)
+{
+	va_list nc_print;
+	int i = 0;
+	int j = 0;
+	int n_displayed = 0;
+	char *str = NULL;
+
+	va_start(nc_print, format);
+	for (i = 0; format[i] != '\0'; i++)
 	{
-		if (format[0] == '%')
+		if (format[i] != '%')
 		{
-			structype = driver(format);
-			if (structype)
-			{
-				q[0] = '%';
-				q[1] = format[1];
-				written += structype(q, pa);
-			}
-			else if (format[1] != '\0')
-			{
-				written += _putchar('%');
-				written += _putchar(format[1]);
-			}
-			else
-			{
-				written += _putchar('%');
-				break;
-			}
-			format += 2;
+			_putchar(format[i]);
+			n_displayed++;
 		}
 		else
 		{
-			written += _putchar(format[0]);
-			format++;
+			if (format[i + 1] == 'c')
+			{
+				_putchar(va_arg(nc_print, int));
+				i++; n_displayed++;
+			}
+			else if (format[i + 1] == 's')
+			{
+				str = va_arg(nc_print, char *);
+				while (str[j] != '\0')
+				{
+					j = 0; j++;
+					_putchar(str[j]);
+					n_displayed++;
+				}
+			}
+			else if (format[i + 1] == '%')
+			{
+				_putchar('%');
+				i++; n_displayed++;
+			}
+			i++;
 		}
 	}
-	_putchar(-2);
-	return (written);
+	va_end(nc_print);
+	return (0);
 }
