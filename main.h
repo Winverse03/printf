@@ -15,7 +15,7 @@
 typedef struct func_type
 {
 	char *t;
-	int (*f)(va_list);
+	int (*c)(va_list);
 } func_t;
 
 int (*get_func(const char *format))(va_list);
