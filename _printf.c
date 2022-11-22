@@ -46,12 +46,12 @@ static int (*check_for_specifiers(const char *format))(va_list)
 int _printf(const char *format, ...)
 {
 	unsigned int i = 0, count = 0;
-	va_list valist;
+	va_list nc_print;
 	int (*f)(va_list);
 
 	if (format == NULL)
 		return (-1);
-	va_start(valist, format);
+	va_start(nc_print, format);
 	while (format[i])
 	{
 		for (; format[i] != '%' && format[i]; i++)
@@ -64,7 +64,7 @@ int _printf(const char *format, ...)
 		f = check_for_specifiers(&format[i + 1]);
 		if (f != NULL)
 		{
-			count += f(valist);
+			count += f(nc_print);
 			i += 2;
 			continue;
 		}
@@ -77,6 +77,6 @@ int _printf(const char *format, ...)
 		else
 			i++;
 	}
-	va_end(valist);
+	va_end(nc_print);
 	return (count);
 }
