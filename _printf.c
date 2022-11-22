@@ -40,5 +40,5 @@ int _printf(const char *format, ...)
 			n_disp += j;
 	}
 	va_end(nch);
-	return (n_printed);
+	return (n_disp);
 }
