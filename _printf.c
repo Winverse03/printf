@@ -17,7 +17,7 @@ int _printf(const char *format, ...)
 	char *str = NULL;
 
 	va_start(nc_print, format);
-	while (format[i] != '\0')
+	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] != '%')
 		{
@@ -29,23 +29,22 @@ int _printf(const char *format, ...)
 			if (format[i + 1] == 'c')
 			{
 				_putchar(va_arg(nc_print, int));
-				i++, n_displayed++;
+				i++; n_displayed++;
 			}
 			else if (format[i + 1] == 's')
 			{
-				i++;
 				str = va_arg(nc_print, char *);
 				while (str[j] != '\0')
 				{
-					j = 0;
+					j = 0; j++;
 					_putchar(str[j]);
-					j++, n_displayed++;
+					n_displayed++;
 				}
 			}
 			else if (format[i + 1] == '%')
 			{
 				_putchar('%');
-				i++, n_displayed++;
+				i++; n_displayed++;
 			}
 			i++;
 		}
