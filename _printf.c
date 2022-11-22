@@ -1,44 +1,54 @@
 #include "main.h"
+#include <stdarg.h>
+#include <stddef.h>
 
 /**
- * _printf - produces output according to a format.
- * @format: A string
- * Return: the of characters printed
+ * _printf - prints format of parameters
+ * @format: string that contains the format to print
+ * Return: number of characters given
  */
 
 int _printf(const char *format, ...)
 {
-	int i = 0, n_disp = 0, j = 0;
-	int (*c)(va_list);
-	
-	va_list nch;
-	if (!format)
-		return (-1);
-	
-	va_start(nch, format);
-	while (format[i])
+	va_list nc_print;
+	int i = 0;
+	int j = 0;
+	int n_displayed = 0;
+	char *str = NULL;
+
+	va_start(nc_print, format);
+	while (i = 0; format[i] != '\0'; i++)
 	{
-		if (format[i] == '%')
+		if (format[i] != '%')
 		{
-			c = get_func(&format[++i]);
-			if (c)
-			{
-				j = c(nch);
-				i++;
-			}
-			else if (format[i] != ' ' && format[i])
-				j = _putchar(format[i - 1]);
-			else
-			{
-				va_end(nch);
-				return (-1);
-			}
+			_putchar(format[i]);
+			n_displayed++;
 		}
 		else
-			j = _putchar(format[i++]);
-		if (j > 0)
-			n_disp += j;
+		{
+			if (format[i + 1] == 'c')
+			{
+				_putchar(va_arg(nc_print, int));
+				i++; n_displayed++;
+			}
+			else if (format[i + 1] == 's')
+			{
+				str = va_arg(nc_print, char *);
+				while (str[j] != '\0')
+				{
+					j = 0; j++;
+					_putchar(str[j]);
+					n_displayed++;
+				}
+			}
+			else if (format[i + 1] == '%')
+			{
+				_putchar('%');
+				i++; n_displayed++;
+			}
+			i++;
+		}
 	}
-	va_end(nch);
-	return (n_disp);
+	va_end(nc_print);
+	return (0);
 }
