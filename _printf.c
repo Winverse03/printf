@@ -13,19 +13,23 @@ int _printf(const char *format, ...)
 	va_list nc_print;
 	int i = 0;
 	int j = 0;
+	int n_displayed = 0;
 	char *str = NULL;
 
 	va_start(nc_print, format);
 	while (format[i] != '\0')
 	{
 		if (format[i] != '%')
+		{
 			_putchar(format[i]);
+			n_displayed++;
+		}
 		else
 		{
 			if (format[i + 1] == 'c')
 			{
 				_putchar(va_arg(nc_print, int));
-				i++;
+				i++, n_displayed++;
 			}
 			else if (format[i + 1] == 's')
 			{
@@ -33,18 +37,18 @@ int _printf(const char *format, ...)
 				str = va_arg(nc_print, char *);
 				while (str[j] != '\0')
 				{
+					j = 0;
 					_putchar(str[j]);
-				j++;
+					j++, n_displayed++;
 				}
 			}
 			else if (format[i + 1] == '%')
 			{
-				i++;
 				_putchar('%');
+				i++, n_displayed++;
 			}
 			i++;
 		}
-			
 	}
 	va_end(nc_print);
 	return (0);
