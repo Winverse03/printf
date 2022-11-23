@@ -34,7 +34,8 @@ int _printf(const char *format, ...)
 				str = va_arg(nc_print, char *);
 				while (str[j] != '\0')
 				{
-					j = 0; j++;
+					j = 0;
+					j++;
 					_putchar(str[j]);
 				}
 			}
