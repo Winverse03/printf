@@ -1,42 +1,48 @@
 #include "main.h"
 #include <stdarg.h>
-#include <limits.h>
 
 /**
- * _print_int - prints integers to stdout
- * @args: integer to be printed
- * Return: string
+ * _print_int - is a function that prints integers
+ * @args: Receives the argument passed
+ * Return: Value.
  */
 
-int print_int(va_list nc_print)
+int _print_int(va_list args)
 {
-	int n = va_arg(nc_print, int);
-	char last_digit;
-	int reversed;
+	int n = va_arg(args, int);
+	int length = 0, power = 1, k, digit, count = 0, number;
 
-	if (n < 0)
+	if (n != 0)
 	{
-		_putchar('-');
-		last_digit = (char)('0' - (n % 10));
-		n /= -10;
+		if (n < 0)
+		{
+			_putchar('-');
+			count++;
+		}
+		number = n;
+		while (number != 0)
+		{
+			number /= 10;
+			length++;
+		}
+		for (k = 1; k <= length - 1; k++)
+			power *= 10;
+		for (k = 1; k <= length; k++)
+		{
+			digit = n / power;
+			if (n < 0)
+				_putchar((digit * -1) + 48);
+			else
+				_putchar(digit + '0');
+			count++;
+			n -= digit * power;
+			power /= 10;
+		}
 	}
 	else
 	{
-		last_digit = (char)((n % 10) + '0');
-		n /= 10;
+		_putchar('0');
+		return (1);
 	}
-	reversed = 0;
-	while (n > 0)
-	{
-		reversed = reversed * 10 + (n % 10);
-		n /= 10;
-	}
-	while (reversed > 0)
-	{
-		char c = (char)((reversed % 10) + '0');
-		_putchar(c);
-		reversed /= 10;
-	}
-	_putchar(last_digit);
-	return (0);
+	return (count);
 }
