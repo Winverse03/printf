@@ -2,7 +2,6 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <stddef.h>
-#include <limits.h>
 
 /**
  * _printf - prints formatted data to stdout
@@ -15,7 +14,6 @@ int _printf(const char *format, ...)
 	va_list args;
 	int i = 0;
 	int output = 0;
-	char *str = NULL;
 	int (*func)(va_list);
 
 	va_start(args, format);
@@ -26,8 +24,9 @@ int _printf(const char *format, ...)
 			func = _select_func(format[i + 1]);
 			if (func != NULL)
 			{
-			output += func(args);
-			i++;
+				i++;
+				func(args);
+				output++;
 			}
 		}
 		else
