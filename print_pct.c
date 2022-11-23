@@ -5,8 +5,8 @@
  * @n_print : arguments
  * Return: !
  */
-int print_pct(va_list n_print)
+int print_pct(va_list nc_print)
 {
-	(void)n_print;
+	(void)nc_print;
 	return (_putchar('%'));
 }
