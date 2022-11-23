@@ -11,46 +11,37 @@
 int _printf(const char *format, ...)
 {
 	va_list nc_print;
-	int i = 0;
-	int j = 0;
-	char *str = NULL;
-	int n_disp = 0;
+	int i = 0, n_disp = 0, j = 0;
+	int (*f)(va_list);
 
+	if (!format)
+		return (-1);
 	va_start(nc_print, format);
-	while (format[i] != '\0')
+
+	while (format[i])
 	{
-		if (format[i] != '%')
+		if (format[i] == '%')
 		{
-			_putchar(format[i]);
-			n_disp++
+			f = get_func(&format[++i]);
+			if (f)
+			{
+				j = f(nc_print);
+				i++;
+			}
+			else if (format[i] != ' ' && format[i])
+				r = _putchar(format[i - 1]);
+			else
+			{
+				va_end(nc_print);
+				return (-1);
+			}
+
 		}
 		else
-		{
-			if (format[i + 1] == 'c')
-			{
-				_putchar(va_arg(nc_print, int));
-				i++;
-				n_disp++
-			}
-			else if (format[i + 1] == 's')
-			{
-				str = va_arg(nc_print, char *);
-				while (str[j] != '\0')
-				{
-					j = 0;
-					j++;
-					_putchar(str[j]);
-					n_disp++
-				}
-			}
-			else if (format[i + 1] == '%')
-			{
-				_putchar('%');
-				i++;
-				n_disp++
-			}
-			i++;
-		}
+			r = _putchar(format[i++]);
+
+		if (j > 0)
+			n_disp += j;
 	}
 	va_end(nc_print);
 	return (n_disp);
