@@ -8,7 +8,7 @@
  * Return: string
  */
 
-int _print_int(va_list nc_print)
+int print_int(va_list nc_print)
 {
 	int n = va_arg(nc_print, int);
 	char last_digit;
