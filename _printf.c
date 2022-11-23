@@ -5,7 +5,7 @@
 #include <limits.h>
 
 /**
- * _printf - prints formatted data to stdout
+ * _printf - prints formatted data to stdoutput
  * @format: string that contains the format to print
  * Return: number of characters written
  */
