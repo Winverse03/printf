@@ -13,13 +13,13 @@
 int _print_str(va_list args)
 {
 	unsigned int k = 0;
-	char *s = va_arg(args, char *);
+	char *str = va_arg(args, char *);
 
-	if (s == NULL)
-		s = "(null)";
-	for (k = 0; s[k] != '\0'; k++)
+	if (str == NULL)
+		str = "(null)";
+	for (k = 0; str[k] != '\0'; k++)
 	{
-		_putchar(s[k]);
+		_putchar(str[k]);
 	}
 	return (k);
 }
