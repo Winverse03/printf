@@ -5,19 +5,18 @@
 #include <limits.h>
 
 /**
- * _printf - prints formatted data to stdoutput
+ * _printf - prints formatted data to stdout
  * @format: string that contains the format to print
  * Return: number of characters written
  */
 
 int _printf(const char * const format, ...)
 {
-	va_list nc_print;
-	int i = 0, n_disp = 0;
+	va_list args;
+	int i = 0, output = 0;
 	int (*func)(va_list);
 
-	va_start(nc_print, format);
-
+	va_start(args, format);
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
@@ -25,17 +24,17 @@ int _printf(const char * const format, ...)
 			func = _select_func(format[i + 1]);
 			if (func != NULL)
 			{
-			n_disp += func(nc_print);
+			output += func(args);
 			i++;
 			}
 		}
 		else
 		{
 			_putchar(format[i]);
-			n_disp++;
+			output++;
 		}
 		i++;
 	}
-	va_end(nc_print);
-	return (n_disp);
+	va_end(args);
+	return (output);
 }
