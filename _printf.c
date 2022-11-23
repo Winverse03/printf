@@ -1,41 +1,36 @@
 #include "main.h"
+#include <stdio.h>
+#include <stddef.h>
 
 /**
- * _printf - produces output according to a format.
- * @format: A string
- * Return: the of characters printed
+ * _printf - produces output according to a format
+ * @format: a character string
+ * Return: number of output integer
  */
+
 int _printf(const char *format, ...)
 {
 	va_list nc_print;
-	int i = 0, n_disp = 0, j = 0;
-	int (*f)(va_list);
+	int i = 0, n_disp = 0, (*func)(va_list);
 
-	if (!format)
-		return (-1);
 	va_start(nc_print, format);
-	while (format[i])
+	for (i = 0; format[i] != '\0'; i++)
 	{
-		if (format[i] == '%')
+		if (format[i] != '%')
 		{
-			f = get_func(&format[++i]);
-			if (f)
-			{
-				j = f(nc_print);
-				i++;
-			}
-			else if (format[i] != ' ' && format[i])
-				j = _putchar(format[i - 1]);
-			else
-			{
-				va_end(nc_print);
-				return (-1);
-			}
+			_putchar(format[i]);
+			n_disp++;
 		}
 		else
-			j = _putchar(format[i++]);
-		if (j > 0)
-			n_disp += j;
+		{
+			func = _select_func(format[i + 1]);
+			if (func != NULL)
+			{
+				i++;
+				func(nc_print);
+				n_disp++;
+			}
+		}
 	}
 	va_end(nc_print);
 	return (n_disp);
