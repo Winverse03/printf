@@ -1,14 +1,21 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
+#include <stdarg.h>
 
-#include<stdarg.h>
-int _printf(const char *format, ...);
 int _putchar(char c);
-int print_char(va_list nc_print);
-int print_str(va_list nc_print);
-int print_int(va_list nc_print);
-int print_pct(va_list nc_print);
-int print_dec(va_list nc_print);
-int(*_select_func(char c))(va_list);
+int _printf(const char *format, ...);
+int _print_int(va_list nc_print);
+int _print_char(va_list nc_print);
+int _print_str(va_list nc_print);
+int _print_bin(va_list nc_print);
+int _print_dec(va_list nc_print);
+int _print_perc(va_list nc_print);
+int (*_select_func(const char c))(va_list);
+int _print_octal(va_list nc_print);
+int _print_unint(va_list nc_print);
+int _print_x(va_list nc_print);
+int _print_X(va_list nc_print);
+int _print_hex(unsigned int n, unsigned int c);
+
 
 #endif
