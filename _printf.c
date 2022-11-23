@@ -35,7 +35,7 @@ int _printf(const char *format, ...)
 		else
 			j = _putchar(format[i++]);
 		if (j > 0)
-			n_disp += r;
+			n_disp += j;
 	}
 	va_end(nc_print);
 	return (n_disp);
