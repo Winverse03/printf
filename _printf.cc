@@ -1,20 +1,17 @@
 #include "main.h"
-#include <stdarg.h>
+#include <stdio.h>
 #include <stddef.h>
 
 /**
- * _printf - prints format of parameters
- * @format: string that contains the format to print
- * Return: number of characters given
+ * _printf - produces output according to a format
+ * @format: a character string
+ * Return: integer number of output
  */
 
 int _printf(const char *format, ...)
 {
 	va_list nc_print;
-	int i = 0;
-	int j = 0;
-	int n_displayed = 0;
-	char *str = NULL;
+	int i = 0, n_disp = 0, (*func)(va_list);
 
 	va_start(nc_print, format);
 	for (i = 0; format[i] != '\0'; i++)
@@ -22,33 +19,19 @@ int _printf(const char *format, ...)
 		if (format[i] != '%')
 		{
 			_putchar(format[i]);
-			n_displayed++;
+			n_disp++;
 		}
 		else
 		{
-			if (format[i + 1] == 'c')
+			func = _select_func(format[i + 1]);
+			if (func != NULL)
 			{
-				_putchar(va_arg(nc_print, int));
-				i++; n_displayed++;
+				i++;
+				func(nc_print);
+				n_disp++;
 			}
-			else if (format[i + 1] == 's')
-			{
-				str = va_arg(nc_print, char *);
-				while (str[j] != '\0')
-				{
-					j = 0; j++;
-					_putchar(str[j]);
-					n_displayed++;
-				}
-			}
-			else if (format[i + 1] == '%')
-			{
-				_putchar('%');
-				i++; n_displayed++;
-			}
-			i++;
 		}
 	}
 	va_end(nc_print);
-	return (0);
+	return (n_disp);
 }
