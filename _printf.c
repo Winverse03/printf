@@ -22,7 +22,7 @@ int _printf(const char *format, ...)
 		if (format[i] != '%')
 		{
 			_putchar(format[i]);
-			n_disp++
+			n_disp++;
 		}
 		else
 		{
@@ -30,7 +30,7 @@ int _printf(const char *format, ...)
 			{
 				_putchar(va_arg(nc_print, int));
 				i++;
-				n_disp++
+				n_disp++;
 			}
 			else if (format[i + 1] == 's')
 			{
@@ -40,14 +40,14 @@ int _printf(const char *format, ...)
 					j = 0;
 					j++;
 					_putchar(str[j]);
-					n_disp++
+					n_disp++;
 				}
 			}
 			else if (format[i + 1] == '%')
 			{
 				_putchar('%');
 				i++;
-				n_disp++
+				n_disp++;
 			}
 			i++;
 		}
