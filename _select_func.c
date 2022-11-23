@@ -21,16 +21,5 @@ int (*_select_func(const char c))(va_list)
 	else if (c == 'i')
 		return (_print_int);
 	else if (c == 'd')
-		return (_print_dec);
-	else if (c == 'b')
-		return (_print_bin);
-	else if (c == 'o')
-		return (_print_octal);
-	else if (c == 'u')
-		return (_print_unint);
-	else if (c == 'x')
-		return (_print_x);
-	else if (c == 'X')
-		return (_print_X);
 	return (NULL);
 }
