@@ -13,13 +13,13 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i = 0, k = 0, num = 0;
+	int i = 0;
 	int output = 0;
 	char *str = NULL;
 	int (*func)(va_list);
 
 	va_start(args, format);
-	while (format[i] != '\0')
+	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
 		{
@@ -35,7 +35,6 @@ int _printf(const char *format, ...)
 			_putchar(format[i]);
 			output++;
 		}
-		i++;
 	}
 	va_end(args);
 	return (output);
