@@ -7,9 +7,9 @@
  * Return: Value.
  */
 
-int print_dec(va_list nc_print)
+int _print_dec(va_list args)
 {
-	int x = va_arg(nc_print, int);
+	int x = va_arg(args, int);
 	int length = 0, power = 1, k, digit, count = 0, number;
 
 	if (x != 0)
