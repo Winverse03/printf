@@ -1,5 +1,5 @@
-#ifndef _MAIN_H_
-#define _MAIN_H_
+#ifndef MAIN_H
+#define MAIN_H
 #include <stdarg.h>
 
 int _putchar(char c);
@@ -16,6 +16,5 @@ int _print_unint(va_list args);
 int _print_x(va_list args);
 int _print_X(va_list args);
 int _print_hex(unsigned int n, unsigned int c);
-
 
 #endif
