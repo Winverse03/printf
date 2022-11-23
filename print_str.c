@@ -7,12 +7,12 @@
  */
 int print_str(va_list nc_print)
 {
-	int n = 0;
-	char *str = va_arg(nc_print, char *);
+	int j;
+	char *s = va_arg(nc_print, char *);
 
-	if (str == NULL)
-		str = "(null)";
-	while (*str && _putchar(*str++) != -1)
-		n++;
-	return (n);
+	for (j = 0; s[j] != '\0'; j++)
+	{
+		_putchar(s[j]);
+	}
+	return (0);
 }
