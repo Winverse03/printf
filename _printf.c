@@ -13,7 +13,9 @@
 int _printf(const char * format, ...)
 {
 	va_list args;
-	int i = 0, output = 0;
+	int i = 0, k= 0, num = 0; 
+	int output = 0;
+	char *str = NULL;
 	int (*func)(va_list);
 
 	va_start(args, format);
