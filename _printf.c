@@ -10,7 +10,7 @@
  * Return: number of characters written
  */
 
-int _printf(const char * const format, ...)
+int _printf(const char * format, ...)
 {
 	va_list args;
 	int i = 0, output = 0;
