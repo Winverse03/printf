@@ -12,9 +12,7 @@ int print_str(va_list nc_print)
 
 	if (str == NULL)
 		str = "(null)";
-
 	while (*str && _putchar(*str++) != -1)
 		n++;
-
 	return (n);
 }
